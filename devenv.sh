@@ -49,7 +49,7 @@ cd vim/src
             --prefix=/usr/local
 
 make && sudo make install
-
+touch ~/.vimrc
 cp ~/mylinux/vimrc ~/.vimrc
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
