@@ -9,8 +9,6 @@ fi
 
 # Adding multiverse and universe repositories
 echo "Adding multiverse and universe repositories"
-add-apt-repository multiverse -y
-add-apt-repository universe -y
 
 # Installing Google Chrome
 echo "Installing Google Chrome"
@@ -21,34 +19,14 @@ apt-get install -y google-chrome-stable
 
 # Installing git and other required software
 echo "Installing git and other required software"
-apt-get install -y git build-essential g++ g++-13 g++-13-x86-64-linux-gnu \
-g++-x86-64-linux-gnu gcc-14 gcc gcc-x86-64-linux-gnu libstdc++-13-dev \
-g++-multilib g++-13-multilib gcc-13-doc gcc-multilib autoconf automake \
-libtool flex bison gcc-doc libstdc++-13-doc libncurses-dev \
+apt-get install -y git build-essential g++ \
+ gcc \
+autoconf automake \
+libtool flex bison  libncurses-dev \
 openssh-server cmake make python3-dev geany \
-openjdk-17-jdk openjdk-17-jre clangd-18
+openjdk-jdk openjdk-jre clangd
 
-update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-18 100
 
-# Cloning and building Vim
-cd ~
-if [ ! -d "vim" ]; then
-    git clone https://github.com/vim/vim.git
-fi
-cd vim/src
-./configure --with-features=huge \
-            --enable-multibyte \
-            --enable-rubyinterp=yes \
-            --enable-python3interp=yes \
-            --with-python3-config-dir=$(python3-config --configdir) \
-            --enable-perlinterp=yes \
-            --enable-luainterp=yes \
-            --enable-gui=gtk2 \
-            --enable-cscope \
-            --prefix=/usr/local
-
-make && make install
-touch ~/.vimrc
 cp ~/mylinux/vimrc ~/.vimrc
 
 # Setting up Vundle and YouCompleteMe
@@ -58,7 +36,5 @@ fi
 
 vim +PluginInstall +qall
 
-cd ~/.vim/bundle/youcompleteme
-python3 install.py --clangd-completer --java-completer
 
 echo "Development environment setup complete."

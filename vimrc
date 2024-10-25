@@ -45,6 +45,10 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'morhetz/gruvbox'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-latex/vim-latex'
+Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'valloric/youcompleteme'
 call vundle#end()
 filetype plugin indent on
@@ -68,5 +72,12 @@ nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
 nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
 nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
 nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>? 
-
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <C-l> :LLPStartPreview<CR>
+"let g:livepreview_previewer = 'qpdfview'
 set completeopt-=preview
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
